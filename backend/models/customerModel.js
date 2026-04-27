@@ -1,6 +1,7 @@
 const db = require('../config/db');
 
 const Customer = {
+
     // Feature 1: Customer History (FR-4)
     getPurchaseHistory: async (customerId) => {
         const query = `
@@ -25,7 +26,38 @@ const Customer = {
             ORDER BY month ASC`;
         const [rows] = await db.execute(query);
         return rows;
+    },
+
+    //(Feature 5)
+
+    getDailyRevenue: async () => {
+        const query = `
+            SELECT 
+                DATE(sale_date) AS date,
+                SUM(amount) AS total_revenue
+            FROM sales
+            GROUP BY DATE(sale_date)
+            ORDER BY date DESC
+        `;
+        const [rows] = await db.execute(query);
+        return rows;
+    },
+
+    getMonthlyRevenue: async () => {
+        const query = `
+            SELECT 
+                DATE_FORMAT(sale_date, '%Y-%m') AS month,
+                SUM(amount) AS total_revenue
+            FROM sales
+            GROUP BY month
+            ORDER BY month DESC
+        `;
+        const [rows] = await db.execute(query);
+        return rows;
     }
+
+    
+
 };
 
 module.exports = Customer;
