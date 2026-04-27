@@ -26,3 +26,24 @@ exports.getAnalytics = async (req, res) => {
         });
     }
 };
+// Feature 5: Daily Revenue
+exports.getDailyRevenue = async (req, res) => {
+    try {
+        const data = await Customer.getDailyRevenue();
+        res.status(200).json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch daily revenue" });
+    }
+};
+
+// Feature 5: Monthly Revenue
+exports.getMonthlyRevenue = async (req, res) => {
+    try {
+        const data = await Customer.getMonthlyRevenue();
+        res.status(200).json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch monthly revenue" });
+    }
+};
