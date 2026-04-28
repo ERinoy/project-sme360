@@ -6,30 +6,35 @@ const SupplierList = () => {
     useEffect(() => {
         fetch('/api/suppliers')
             .then(res => res.json())
-            .then(data => setSuppliers(data));
+            .then(data => {
+                if (Array.isArray(data)) {
+                    setSuppliers(data);
+                } else {
+                    console.error("Suppliers API error:", data);
+                    setSuppliers([]);
+                }
+            })
+            .catch(err => {
+                console.error("Supplier List Error:", err);
+                setSuppliers([]);
+            });
     }, []);
 
     return (
-        <div style={{ padding: '20px', backgroundColor: 'white', borderRadius: '15px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+        <div>
             <h2 style={{ color: '#1a1a2e' }}>Primary Suppliers</h2>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead>
-                    <tr style={{ textAlign: 'left', borderBottom: '2px solid #eee' }}>
-                        <th style={{ padding: '10px' }}>Company</th>
-                        <th style={{ padding: '10px' }}>Contact</th>
-                        <th style={{ padding: '10px' }}>Phone</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {suppliers.map(s => (
-                        <tr key={s.id} style={{ borderBottom: '1px solid #f9f9f9' }}>
-                            <td style={{ padding: '10px' }}>{s.supplier_name}</td>
-                            <td style={{ padding: '10px' }}>{s.contact_person}</td>
-                            <td style={{ padding: '10px' }}>{s.phone}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+
+            {suppliers.length === 0 ? (
+                <p style={{ color: '#666' }}>No supplier data available.</p>
+            ) : (
+                suppliers.map((s, index) => (
+                    <div key={s.id || index} style={{ marginBottom: '12px' }}>
+                        <strong>{s.supplier_name || 'N/A'}</strong>
+                        <div>Contact: {s.contact_person || 'N/A'}</div>
+                        <div>Phone: {s.phone || 'N/A'}</div>
+                    </div>
+                ))
+            )}
         </div>
     );
 };
