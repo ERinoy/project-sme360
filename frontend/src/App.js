@@ -6,16 +6,19 @@ import CustomerHistory from './components/CustomerHistory';
 import SupplierList from './components/SupplierList';
 import AuditLogs from './components/AuditLogs';
 import RevenueSummary from './components/RevenueSummary';
+import HighestExpenseCategories from './components/HighestExpenseCategories';
 
 function App() {
   const [currentId, setCurrentId] = useState(1);
 
   return (
     <div className="App" style={{ backgroundColor: '#f0f2f5', minHeight: '100vh', paddingBottom: '60px' }}>
-      <header style={{
-        backgroundColor: '#1a1a2e',
-        padding: '40px 20px',
-        color: 'white',
+      
+      {/* HEADER */}
+      <header style={{ 
+        backgroundColor: '#1a1a2e', 
+        padding: '40px 20px', 
+        color: 'white', 
         textAlign: 'center',
         boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
       }}>
@@ -27,49 +30,69 @@ function App() {
         </p>
       </header>
 
+      {/* MAIN */}
       <main style={{ maxWidth: '1200px', margin: '40px auto', padding: '0 20px' }}>
+        
+        {/* Stock Alerts */}
         <section style={{ marginBottom: '30px' }}>
           <StockAlerts />
         </section>
 
-        <section style={{
-          marginBottom: '40px',
-          backgroundColor: 'white',
-          padding: '30px',
+        {/* Feature 5 */}
+        <section style={{ 
+          marginBottom: '40px', 
+          backgroundColor: 'white', 
+          padding: '30px', 
           borderRadius: '20px',
           boxShadow: '0 10px 25px rgba(0,0,0,0.05)'
         }}>
           <RevenueSummary />
         </section>
 
-        <section style={{
-          marginBottom: '40px',
-          backgroundColor: 'white',
-          padding: '30px',
+        {/* Feature 10 */}
+        <section style={{ 
+          marginBottom: '40px', 
+          backgroundColor: 'white', 
+          padding: '30px', 
+          borderRadius: '20px',
+          boxShadow: '0 10px 25px rgba(0,0,0,0.05)'
+        }}>
+          <HighestExpenseCategories />
+        </section>
+
+        {/* Analytics */}
+        <section style={{ 
+          marginBottom: '40px', 
+          backgroundColor: 'white', 
+          padding: '30px', 
           borderRadius: '20px',
           boxShadow: '0 10px 25px rgba(0,0,0,0.05)'
         }}>
           <AnalyticsDashboard />
         </section>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))',
+        {/* Grid Section */}
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', 
           gap: '30px',
           marginBottom: '40px'
         }}>
-          <section style={{
-            backgroundColor: 'white',
-            padding: '30px',
+          
+          {/* Suppliers */}
+          <section style={{ 
+            backgroundColor: 'white', 
+            padding: '30px', 
             borderRadius: '20px',
             boxShadow: '0 10px 25px rgba(0,0,0,0.05)'
           }}>
             <SupplierList />
           </section>
 
-          <section style={{
-            backgroundColor: 'white',
-            padding: '30px',
+          {/* Customer History */}
+          <section style={{ 
+            backgroundColor: 'white', 
+            padding: '30px', 
             borderRadius: '20px',
             boxShadow: '0 10px 25px rgba(0,0,0,0.05)'
           }}>
@@ -81,14 +104,14 @@ function App() {
               <label style={{ fontWeight: 'bold', marginRight: '10px' }}>
                 Enter Customer ID:
               </label>
-              <input
-                type="number"
-                value={currentId}
+              <input 
+                type="number" 
+                value={currentId} 
                 onChange={(e) => setCurrentId(e.target.value)}
-                style={{
-                  padding: '10px',
-                  width: '70px',
-                  borderRadius: '8px',
+                style={{ 
+                  padding: '10px', 
+                  width: '70px', 
+                  borderRadius: '8px', 
                   border: '2px solid #007bff',
                   textAlign: 'center',
                   fontSize: '1rem'
@@ -100,11 +123,14 @@ function App() {
           </section>
         </div>
 
+        {/* Audit Logs */}
         <section style={{ marginTop: '20px' }}>
           <AuditLogs />
         </section>
+
       </main>
 
+      {/* FOOTER */}
       <footer style={{ textAlign: 'center', color: '#6c757d', padding: '40px 0' }}>
         <p style={{ fontWeight: 'bold' }}>
           SME360 | BRAC University CSE470 Semester Project

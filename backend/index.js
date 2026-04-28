@@ -6,7 +6,7 @@ const db = require('./config/db');
 const customerRoutes = require('./routes/customerRoutes');
 const supplierRoutes = require('./routes/supplierRoutes');
 const auditRoutes = require('./routes/auditRoutes');
-
+const expenseRoutes = require('./routes/expenseRoutes');
 const app = express();
 
 // Middleware
@@ -15,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/products', productRoutes);
 app.use('/api/audit', auditRoutes);
+app.use('/api/expenses', expenseRoutes);
 
 // Dummy Route to test if Server is alive
 app.get('/', (req, res) => {
