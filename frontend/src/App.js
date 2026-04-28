@@ -7,6 +7,7 @@ import SupplierList from './components/SupplierList';
 import AuditLogs from './components/AuditLogs';
 import RevenueSummary from './components/RevenueSummary';
 import HighestExpenseCategories from './components/HighestExpenseCategories';
+import BreakEvenAnalysis from './components/BreakEvenAnalysis';
 
 function App() {
   const [currentId, setCurrentId] = useState(1);
@@ -14,7 +15,6 @@ function App() {
   return (
     <div className="App" style={{ backgroundColor: '#f0f2f5', minHeight: '100vh', paddingBottom: '60px' }}>
       
-      {/* HEADER */}
       <header style={{ 
         backgroundColor: '#1a1a2e', 
         padding: '40px 20px', 
@@ -30,15 +30,12 @@ function App() {
         </p>
       </header>
 
-      {/* MAIN */}
       <main style={{ maxWidth: '1200px', margin: '40px auto', padding: '0 20px' }}>
         
-        {/* Stock Alerts */}
         <section style={{ marginBottom: '30px' }}>
           <StockAlerts />
         </section>
 
-        {/* Feature 5 */}
         <section style={{ 
           marginBottom: '40px', 
           backgroundColor: 'white', 
@@ -49,7 +46,6 @@ function App() {
           <RevenueSummary />
         </section>
 
-        {/* Feature 10 */}
         <section style={{ 
           marginBottom: '40px', 
           backgroundColor: 'white', 
@@ -60,7 +56,16 @@ function App() {
           <HighestExpenseCategories />
         </section>
 
-        {/* Analytics */}
+        <section style={{ 
+          marginBottom: '40px', 
+          backgroundColor: 'white', 
+          padding: '30px', 
+          borderRadius: '20px',
+          boxShadow: '0 10px 25px rgba(0,0,0,0.05)'
+        }}>
+          <BreakEvenAnalysis />
+        </section>
+
         <section style={{ 
           marginBottom: '40px', 
           backgroundColor: 'white', 
@@ -71,7 +76,6 @@ function App() {
           <AnalyticsDashboard />
         </section>
 
-        {/* Grid Section */}
         <div style={{ 
           display: 'grid', 
           gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', 
@@ -79,7 +83,6 @@ function App() {
           marginBottom: '40px'
         }}>
           
-          {/* Suppliers */}
           <section style={{ 
             backgroundColor: 'white', 
             padding: '30px', 
@@ -89,7 +92,6 @@ function App() {
             <SupplierList />
           </section>
 
-          {/* Customer History */}
           <section style={{ 
             backgroundColor: 'white', 
             padding: '30px', 
@@ -123,14 +125,12 @@ function App() {
           </section>
         </div>
 
-        {/* Audit Logs */}
         <section style={{ marginTop: '20px' }}>
           <AuditLogs />
         </section>
 
       </main>
 
-      {/* FOOTER */}
       <footer style={{ textAlign: 'center', color: '#6c757d', padding: '40px 0' }}>
         <p style={{ fontWeight: 'bold' }}>
           SME360 | BRAC University CSE470 Semester Project
