@@ -8,6 +8,7 @@ import AuditLogs from './components/AuditLogs';
 import RevenueSummary from './components/RevenueSummary';
 import HighestExpenseCategories from './components/HighestExpenseCategories';
 import BreakEvenAnalysis from './components/BreakEvenAnalysis';
+import MonthlyPerformanceSummary from './components/MonthlyPerformanceSummary';
 
 function App() {
   const [currentId, setCurrentId] = useState(1);
@@ -64,6 +65,16 @@ function App() {
           boxShadow: '0 10px 25px rgba(0,0,0,0.05)'
         }}>
           <BreakEvenAnalysis />
+        </section>
+
+        <section style={{ 
+          marginBottom: '40px', 
+          backgroundColor: 'white', 
+          padding: '30px', 
+          borderRadius: '20px',
+          boxShadow: '0 10px 25px rgba(0,0,0,0.05)'
+        }}>
+          <MonthlyPerformanceSummary />
         </section>
 
         <section style={{ 

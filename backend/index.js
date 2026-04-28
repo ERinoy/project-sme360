@@ -8,6 +8,7 @@ const supplierRoutes = require('./routes/supplierRoutes');
 const auditRoutes = require('./routes/auditRoutes');
 const expenseRoutes = require('./routes/expenseRoutes');
 const breakEvenRoutes = require('./routes/breakEvenRoutes');
+const performanceRoutes = require('./routes/performanceRoutes');
 const app = express();
 
 // Middleware
@@ -18,6 +19,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/audit', auditRoutes);
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/breakeven', breakEvenRoutes);
+app.use('/api/performance', performanceRoutes);
 
 
 // Dummy Route to test if Server is alive
