@@ -2,49 +2,64 @@ import React, { useEffect, useState } from 'react';
 
 const CustomerHistory = ({ customerId }) => {
     const [history, setHistory] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [customerName, setCustomerName] = useState('Unknown Customer');
 
     useEffect(() => {
-        setLoading(true);
-        // This calls your backend via the proxy in package.json
+        if (!customerId) return;
+
         fetch(`/api/customers/${customerId}/history`)
             .then(res => res.json())
             .then(data => {
-                setHistory(data);
-                setLoading(false);
+                if (Array.isArray(data)) {
+                    setHistory(data);
+
+                    if (data.length > 0 && data[0]?.customer_name) {
+                        setCustomerName(data[0].customer_name);
+                    } else {
+                        setCustomerName('No customer found');
+                    }
+                } else {
+                    console.error("Customer history API error:", data);
+                    setHistory([]);
+                    setCustomerName('No customer found');
+                }
             })
             .catch(err => {
-                console.error("Error fetching history:", err);
-                setLoading(false);
+                console.error("Customer History Error:", err);
+                setHistory([]);
+                setCustomerName('No customer found');
             });
     }, [customerId]);
 
-    if (loading) return <p>Loading transaction history...</p>;
-    if (history.length === 0) return <p>No purchase history found for this customer.</p>;
-
     return (
-        <div style={{ margin: '20px', fontFamily: 'Arial, sans-serif' }}>
-            <h2 style={{ color: '#333' }}>Purchase History: {history[0].customer_name}</h2>
-            <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
-                <thead>
-                    <tr style={{ backgroundColor: '#007bff', color: 'white', textAlign: 'left' }}>
-                        <th style={{ padding: '12px', border: '1px solid #ddd' }}>Sale ID</th>
-                        <th style={{ padding: '12px', border: '1px solid #ddd' }}>Amount (BDT)</th>
-                        <th style={{ padding: '12px', border: '1px solid #ddd' }}>Date & Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {history.map((item) => (
-                        <tr key={item.id} style={{ borderBottom: '1px solid #eee' }}>
-                            <td style={{ padding: '12px', border: '1px solid #ddd' }}>{item.id}</td>
-                            <td style={{ padding: '12px', border: '1px solid #ddd' }}>৳{item.amount}</td>
-                            <td style={{ padding: '12px', border: '1px solid #ddd' }}>
-                                {new Date(item.sale_date).toLocaleString()}
-                            </td>
-                        </tr>
+        <div>
+            <h3 style={{ color: '#1a1a2e' }}>
+                Customer: {customerName}
+            </h3>
+
+            {history.length === 0 ? (
+                <p style={{ color: '#666' }}>
+                    No purchase history available for this customer.
+                </p>
+            ) : (
+                <div style={{ display: 'grid', gap: '12px' }}>
+                    {history.map((item, index) => (
+                        <div 
+                            key={item.id || index}
+                            style={{
+                                padding: '12px',
+                                border: '1px solid #eee',
+                                borderRadius: '10px',
+                                backgroundColor: '#fafafa'
+                            }}
+                        >
+                            <strong>{item.product_name || 'Product'}</strong>
+                            <div>Amount: ৳{item.total_amount || item.amount || 0}</div>
+                            <div>Date: {item.date ? new Date(item.date).toLocaleDateString() : 'N/A'}</div>
+                        </div>
                     ))}
-                </tbody>
-            </table>
+                </div>
+            )}
         </div>
     );
 };

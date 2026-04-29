@@ -11,12 +11,12 @@ const createExpense = async (req, res) => {
     const { title, amount, category_id, expense_date } = req.body;
     const created_by = req.user.userId;
 
-    // Validation
     if (!title || !amount || !category_id || !expense_date) {
       return res.status(400).json({
         message: 'title, amount, category_id, and expense_date are required.'
       });
     }
+
     if (amount <= 0) {
       return res.status(400).json({ message: 'Amount must be greater than zero.' });
     }
@@ -30,10 +30,9 @@ const createExpense = async (req, res) => {
     );
 
     res.status(201).json({
-      message:    'Expense recorded successfully.',
+      message: 'Expense recorded successfully.',
       expense_id: newId
     });
-
   } catch (error) {
     console.error('Create expense error:', error);
     res.status(500).json({ message: 'Server error while recording expense.' });
@@ -53,7 +52,6 @@ const getAllExpenses = async (req, res) => {
       count: expenses.length,
       expenses
     });
-
   } catch (error) {
     console.error('Get expenses error:', error);
     res.status(500).json({ message: 'Server error while fetching expenses.' });
@@ -73,7 +71,6 @@ const getExpenseById = async (req, res) => {
     }
 
     res.status(200).json(expense);
-
   } catch (error) {
     console.error('Get expense by ID error:', error);
     res.status(500).json({ message: 'Server error while fetching expense.' });
@@ -88,7 +85,6 @@ const getAllCategories = async (req, res) => {
   try {
     const categories = await expenseModel.getAllCategories();
     res.status(200).json({ categories });
-
   } catch (error) {
     console.error('Get categories error:', error);
     res.status(500).json({ message: 'Server error while fetching categories.' });
@@ -105,7 +101,6 @@ const getMonthlyTotal = async (req, res) => {
     const { month, year } = req.query;
     const total = await expenseModel.getMonthlyTotal(month, year);
     res.status(200).json(total);
-
   } catch (error) {
     console.error('Get monthly total error:', error);
     res.status(500).json({ message: 'Server error while fetching monthly total.' });
@@ -122,10 +117,20 @@ const getTopExpenseCategories = async (req, res) => {
     const { month, year } = req.query;
     const categories = await expenseModel.getTopExpenseCategories(month, year);
     res.status(200).json({ categories });
-
   } catch (error) {
     console.error('Get top categories error:', error);
     res.status(500).json({ message: 'Server error while fetching top categories.' });
+  }
+};
+
+const getHighestExpenseCategories = async (req, res) => {
+  try {
+    const { month, year } = req.query;
+    const categories = await expenseModel.getHighestExpenseCategories(month, year);
+    res.status(200).json({ categories });
+  } catch (error) {
+    console.error('Get highest categories error:', error);
+    res.status(500).json({ message: 'Server error while fetching highest expense categories.' });
   }
 };
 
@@ -135,5 +140,6 @@ module.exports = {
   getExpenseById,
   getAllCategories,
   getMonthlyTotal,
-  getTopExpenseCategories
+  getTopExpenseCategories,
+  getHighestExpenseCategories
 };

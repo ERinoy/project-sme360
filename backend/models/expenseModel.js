@@ -91,14 +91,14 @@ const getAllCategories = async () => {
 // ─────────────────────────────────────────
 const getMonthlyTotal = async (month, year) => {
   const targetMonth = month || new Date().getMonth() + 1;
-  const targetYear  = year  || new Date().getFullYear();
+  const targetYear = year || new Date().getFullYear();
 
   const [rows] = await db.execute(
     `SELECT
       MONTH(expense_date) AS month,
-      YEAR(expense_date)  AS year,
-      SUM(amount)         AS total_expenses,
-      COUNT(*)            AS total_entries
+      YEAR(expense_date) AS year,
+      SUM(amount) AS total_expenses,
+      COUNT(*) AS total_entries
      FROM expenses
      WHERE MONTH(expense_date) = ? AND YEAR(expense_date) = ?
      GROUP BY MONTH(expense_date), YEAR(expense_date)`,
@@ -113,13 +113,13 @@ const getMonthlyTotal = async (month, year) => {
 // ─────────────────────────────────────────
 const getTopExpenseCategories = async (month, year) => {
   const targetMonth = month || new Date().getMonth() + 1;
-  const targetYear  = year  || new Date().getFullYear();
+  const targetYear = year || new Date().getFullYear();
 
   const [rows] = await db.execute(
     `SELECT
       ec.category_name,
-      SUM(e.amount)  AS total_amount,
-      COUNT(*)       AS total_entries
+      SUM(e.amount) AS total_amount,
+      COUNT(*) AS total_entries
      FROM expenses e
      JOIN expense_categories ec ON e.category_id = ec.category_id
      WHERE MONTH(e.expense_date) = ? AND YEAR(e.expense_date) = ?
@@ -130,11 +130,16 @@ const getTopExpenseCategories = async (month, year) => {
   return rows;
 };
 
+const getHighestExpenseCategories = async (month, year) => {
+  return getTopExpenseCategories(month, year);
+};
+
 module.exports = {
   createExpense,
   getAllExpenses,
   getExpenseById,
   getAllCategories,
   getMonthlyTotal,
-  getTopExpenseCategories
+  getTopExpenseCategories,
+  getHighestExpenseCategories
 };
