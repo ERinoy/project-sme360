@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-// Core Components
+// #Import_Component_Ekhane_Sob_Frontend_Component_Import_Kora_Hoy
 import Login from './components/Login';
 import StockAlerts from './components/StockAlerts';
 import LowMarginAlerts from './components/LowMarginAlerts';
@@ -9,16 +9,17 @@ import CustomerHistory from './components/CustomerHistory';
 import SupplierList from './components/SupplierList';
 import AuditLogs from './components/AuditLogs';
 import FinanceDecisionSupport from './components/FinanceDecisionSupport';
+import BusinessManagement from './components/BusinessManagement';
 
 function App() {
-  // State for Authentication
+  // #State_User_Ekhane_Login_User_Data_Store_Hoy
   const [user, setUser] = useState(null);
 
-  // State for Customer Intelligence Feature
+  // #State_Customer_ID_Ekhane_Customer_History_Er_Selected_ID_Store_Hoy
   const [currentId, setCurrentId] = useState(1);
   const [maxId, setMaxId] = useState(1);
 
-  // Fetch the valid ID range only when a user is logged in
+  // #API_Max_Customer_ID_Ekhane_Login_Hole_Valid_Customer_ID_Range_Load_Hoy
   useEffect(() => {
     if (user) {
       fetch('/api/customers/meta/max-id')
@@ -28,12 +29,13 @@ function App() {
     }
   }, [user]);
 
+  // #Logout_Function_Ekhane_User_Logout_Korle_State_Reset_Hoy
   const handleLogout = () => {
     setUser(null);
     setCurrentId(1);
   };
 
-  // --- GATEKEEPER: AUTHENTICATION CHECK ---
+  // #Login_Check_Ekhane_User_Login_Na_Thakle_Login_Page_Dekhay
   if (!user) {
     return <Login onLogin={setUser} />;
   }
@@ -48,7 +50,7 @@ function App() {
         fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif'
       }}
     >
-      {/* GLOBAL HEADER */}
+      {/* #Header_Section_Ekhane_Project_Title_Ar_Logout_Button_Ase */}
       <header
         style={{
           backgroundColor: '#1a1a2e',
@@ -92,14 +94,15 @@ function App() {
         </div>
       </header>
 
+      {/* #Main_Dashboard_Ekhane_All_Feature_Section_Show_Hoy */}
       <main style={{ maxWidth: '1300px', margin: '40px auto', padding: '0 20px' }}>
-        {/* SECTION 1: PROACTIVE ALERTS */}
+        {/* #Alert_Section_Ekhane_Stock_Ar_Low_Margin_Alert_Dekhay */}
         <section style={{ marginBottom: '30px' }}>
           <StockAlerts />
           <LowMarginAlerts />
         </section>
 
-        {/* SECTION 2: BUSINESS ANALYTICS */}
+        {/* #Analytics_Section_Ekhane_Performance_Analytics_Dekhay */}
         <section
           style={{
             marginBottom: '40px',
@@ -123,7 +126,20 @@ function App() {
           <AnalyticsDashboard />
         </section>
 
-        {/* SECTION 3: SADAB FINANCE DECISION SUPPORT FEATURES */}
+        {/* #Business_Management_Section_Ekhane_FR1_FR2_FR3_FR6_Feature_Ase */}
+        <section
+          style={{
+            marginBottom: '40px',
+            backgroundColor: 'white',
+            padding: '30px',
+            borderRadius: '15px',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
+          }}
+        >
+          <BusinessManagement />
+        </section>
+
+        {/* #Finance_Section_Ekhane_Revenue_Expense_BreakEven_Summary_Audit_Ase */}
         <section
           style={{
             marginBottom: '40px',
@@ -136,7 +152,7 @@ function App() {
           <FinanceDecisionSupport />
         </section>
 
-        {/* SECTION 4: MANAGEMENT GRID */}
+        {/* #Management_Grid_Ekhane_Supplier_Ar_Customer_Feature_Ase */}
         <div
           style={{
             display: 'grid',
@@ -145,7 +161,7 @@ function App() {
             marginBottom: '40px'
           }}
         >
-          {/* Supplier Management */}
+          {/* #Supplier_Section_Ekhane_Supplier_Network_Dekhay */}
           <section
             style={{
               backgroundColor: 'white',
@@ -158,7 +174,7 @@ function App() {
             <SupplierList />
           </section>
 
-          {/* Customer Intelligence */}
+          {/* #Customer_Section_Ekhane_Customer_Purchase_History_Dekhay */}
           <section
             style={{
               backgroundColor: 'white',
@@ -169,6 +185,7 @@ function App() {
           >
             <h2 style={{ color: '#1a1a2e', marginTop: 0 }}>👥 Customer Intelligence</h2>
 
+            {/* #Customer_ID_Select_Ekhane_User_Customer_ID_Select_Kore */}
             <div
               style={{
                 backgroundColor: '#eef2f7',
@@ -218,12 +235,13 @@ function App() {
           </section>
         </div>
 
-        {/* SECTION 5: SECURITY & AUDIT */}
+        {/* #Audit_Section_Ekhane_Existing_Audit_Logs_Dekhay */}
         <section style={{ marginTop: '20px' }}>
           <AuditLogs />
         </section>
       </main>
 
+      {/* #Footer_Section_Ekhane_Project_Info_Dekhay */}
       <footer
         style={{
           textAlign: 'center',
