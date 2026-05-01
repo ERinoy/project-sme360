@@ -1,53 +1,74 @@
 import React, { useEffect, useState } from 'react';
 
 const LowMarginAlerts = () => {
-    const [lowMargins, setLowMargins] = useState([]);
+  const [lowMargins, setLowMargins] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
-    useEffect(() => {
-        fetch('/api/customers/alerts/low-margins')
-            .then(res => res.json())
-            .then(data => setLowMargins(data))
-            .catch(err => console.error("Margin Alert Error:", err));
-    }, []);
+  useEffect(() => {
+    fetch('/api/customers/alerts/low-margins')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setLowMargins(data);
+          setErrorMessage('');
+        } else {
+          console.log('Low margin API returned:', data);
+          setLowMargins([]);
+          setErrorMessage('Low margin data is not available right now.');
+        }
+      })
+      .catch(err => {
+        console.error('Margin Alert Error:', err);
+        setLowMargins([]);
+        setErrorMessage('Could not load low margin alerts.');
+      });
+  }, []);
 
-    if (lowMargins.length === 0) return null;
-
+  if (errorMessage) {
     return (
-        <div style={{ 
-            backgroundColor: '#fff4e5', 
-            border: '1px solid #ffe2b3', 
-            padding: '20px', 
-            borderRadius: '15px',
-            marginBottom: '25px',
-            color: '#663c00',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-            borderLeft: '6px solid #ff9800'
-        }}>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                <span style={{ fontSize: '1.4rem', marginRight: '10px' }}>📉</span>
-                <h3 style={{ margin: 0 }}>Low Margin Sales Detected</h3>
-            </div>
-            <p style={{ fontSize: '0.9rem', marginBottom: '15px' }}>
-                The following transactions are currently performing below the 15% profit margin threshold:
-            </p>
-            <div style={{ display: 'grid', gap: '10px' }}>
-                {lowMargins.map(sale => (
-                    <div key={sale.id} style={{ 
-                        backgroundColor: 'rgba(255, 255, 255, 0.6)', 
-                        padding: '10px 15px', 
-                        borderRadius: '8px',
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                    }}>
-                        <span>Sale <strong>#{sale.id}</strong> - {sale.customer_name}</span>
-                        <span style={{ color: '#d9534f', fontWeight: 'bold' }}>
-                            Margin: {parseFloat(sale.margin_percentage).toFixed(2)}%
-                        </span>
-                    </div>
-                ))}
-            </div>
-        </div>
+      <div
+        style={{
+          backgroundColor: '#fff3cd',
+          color: '#856404',
+          padding: '15px',
+          borderRadius: '10px',
+          marginBottom: '15px',
+          border: '1px solid #ffeeba'
+        }}
+      >
+        <strong>Low Margin Alert:</strong> {errorMessage}
+      </div>
     );
+  }
+
+  if (lowMargins.length === 0) {
+    return null;
+  }
+
+  return (
+    <div
+      style={{
+        backgroundColor: '#fff5f5',
+        color: '#721c24',
+        padding: '15px',
+        borderRadius: '10px',
+        marginBottom: '15px',
+        border: '1px solid #f5c6cb'
+      }}
+    >
+      <h3 style={{ marginTop: 0 }}>Low Margin Sales Detected</h3>
+      <p>The following transactions are below the 15% profit margin threshold:</p>
+
+      <ul>
+        {lowMargins.map((sale) => (
+          <li key={sale.id}>
+            Sale #{sale.id} - {sale.customer_name} Margin:{' '}
+            {Number(sale.margin_percentage || 0).toFixed(2)}%
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default LowMarginAlerts;
