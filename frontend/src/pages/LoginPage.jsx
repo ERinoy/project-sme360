@@ -140,7 +140,7 @@ export default function LoginPage() {
               background:   loading ? 'var(--bg-hover)' : 'var(--accent)',
               border:       'none',
               borderRadius: 'var(--radius-sm)',
-              color:        '#fff',
+              color:        '#257f4f',
               fontWeight:   600,
               fontSize:     '0.95rem',
               cursor:       loading ? 'not-allowed' : 'pointer',

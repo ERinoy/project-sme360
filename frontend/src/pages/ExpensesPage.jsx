@@ -60,7 +60,7 @@ export default function ExpensesPage() {
               style={{
                 background:   showForm ? 'var(--bg-hover)' : 'var(--accent)',
                 border:       'none', borderRadius: 'var(--radius-sm)',
-                color:        '#fff', padding: '10px 20px', fontWeight: 600,
+                color:        '#d41a1a', padding: '10px 20px', fontWeight: 600,
                 cursor:       'pointer', fontSize: '0.9rem', transition: 'var(--transition)',
                 boxShadow:    showForm ? 'none' : '0 0 16px rgba(99,102,241,0.3)'
               }}>

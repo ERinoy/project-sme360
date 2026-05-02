@@ -46,7 +46,7 @@ export default function TransactionsPage() {
               background:   showForm ? 'var(--bg-hover)' : 'var(--accent)',
               border:       'none',
               borderRadius: 'var(--radius-sm)',
-              color:        '#fff',
+              color:        '#2e4895',
               padding:      '10px 20px',
               fontWeight:   600,
               cursor:       'pointer',
