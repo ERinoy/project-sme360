@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useNavigate }     from 'react-router-dom';
 import { useAuth }         from '../context/AuthContext';
 import API                 from '../api/axios';
+import logo                from '../logo_sme360.svg';
 
 export default function LoginPage() {
   const [form,    setForm]    = useState({ email: '', password: '' });
@@ -46,7 +47,7 @@ export default function LoginPage() {
         transform:    'translateX(-50%)',
         width:        '600px',
         height:       '300px',
-        background:   'radial-gradient(ellipse, rgba(99,102,241,0.12) 0%, transparent 70%)',
+        background:   'radial-gradient(ellipse, rgba(156, 158, 245, 0.12) 0%, transparent 70%)',
         pointerEvents:'none'
       }} />
 
@@ -66,19 +67,20 @@ export default function LoginPage() {
             width:        '52px',
             height:       '52px',
             borderRadius: '14px',
-            background:   'var(--accent)',
+            overflow:     'hidden',
             display:      'flex',
             alignItems:   'center',
             justifyContent:'center',
             margin:       '0 auto 1rem',
-            fontSize:     '1.5rem',
             boxShadow:    '0 0 20px rgba(99,102,241,0.4)'
-          }}>📊</div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-            SME Analytics
+          }}>
+            <img src={logo} alt="SME 360 logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          </div>
+          <h1 style={{ fontSize: '2.4rem', fontWeight: 550, fontFamily: '"Trebuchet MS", sans-serif', color: '#0c22e7e7' }}>
+            SME 360
           </h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '4px' }}>
-            Business Performance System
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.0rem',color: '#77687de7' , marginTop: '4px' }}>
+            Enterprise Business Solution
           </p>
         </div>
 

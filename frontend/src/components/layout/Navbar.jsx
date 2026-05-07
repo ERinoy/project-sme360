@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import logo from '../../logo_sme360.svg';
 
 const styles = {
   nav: {
@@ -21,15 +22,15 @@ const styles = {
   brand: {
     display:    'flex',
     alignItems: 'center',
-    gap:        '10px',
+    gap:        '20px',
     fontSize:   '1.1rem',
-    fontWeight: 700,
+    fontWeight: 800,
     color:      'var(--text-primary)',
     textDecoration: 'none'
   },
   brandDot: {
-    width:        '10px',
-    height:       '10px',
+    width:        '20px',
+    height:       '20px',
     borderRadius: '50%',
     background:   'var(--accent)',
     boxShadow:    '0 0 8px var(--accent)'
@@ -91,8 +92,7 @@ export default function Navbar() {
   return (
     <nav style={styles.nav}>
       <NavLink to="/" style={styles.brand}>
-        <div style={styles.brandDot} />
-        SME Analytics
+        <img src={logo} alt="SME 360 logo" style={{ height: '100px', width: '100px' }} />
       </NavLink>
 
       <div style={styles.links}>
