@@ -9,3 +9,13 @@ exports.getAlerts = async (req, res) => {
         res.status(500).json({ error: "Failed to fetch stock alerts" });
     }
 };
+
+exports.getProducts = async (req, res) => {
+    try {
+        const products = await Product.getAll();
+        res.status(200).json({ products });
+    } catch (err) {
+        console.error("Error fetching products:", err);
+        res.status(500).json({ error: "Failed to fetch products" });
+    }
+};

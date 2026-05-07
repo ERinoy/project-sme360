@@ -14,12 +14,14 @@ const transactionRoutes = require('./routes/transactionRoutes');
 const expenseRoutes    = require('./routes/expenseRoutes');
 const profitRoutes     = require('./routes/profitRoutes');
 const dashboardRoutes  = require('./routes/dashboardRoutes');
+const productRoutes    = require('./routes/productRoutes');
 
 app.use('/api/auth',         authRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/expenses',     expenseRoutes);
 app.use('/api/profit',       profitRoutes);
 app.use('/api/dashboard',    dashboardRoutes);
+app.use('/api/products',     productRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'SME System API is running.' });

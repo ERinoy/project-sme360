@@ -10,6 +10,11 @@ const Product = {
         WHERE p.stock_quantity < p.min_threshold`;
         const [rows] = await db.execute(query);
         return rows;
+    },
+
+    getAll: async () => {
+        const [rows] = await db.execute('SELECT product_id, product_name, selling_price FROM products');
+        return rows;
     }
 };
 
