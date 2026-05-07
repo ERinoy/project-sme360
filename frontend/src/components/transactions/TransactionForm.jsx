@@ -122,7 +122,7 @@ export default function TransactionForm({ onSuccess }) {
           background:   loading ? 'var(--bg-hover)' : 'var(--accent)',
           border:       'none',
           borderRadius: 'var(--radius-sm)',
-          color:        '#fff',
+          color:        '#23a566',
           fontWeight:   600,
           fontSize:     '0.9rem',
           cursor:       loading ? 'not-allowed' : 'pointer',

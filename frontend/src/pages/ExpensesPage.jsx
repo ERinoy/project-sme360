@@ -64,7 +64,7 @@ export default function ExpensesPage() {
                 cursor:       'pointer', fontSize: '0.9rem', transition: 'var(--transition)',
                 boxShadow:    showForm ? 'none' : '0 0 16px rgba(99,102,241,0.3)'
               }}>
-              {showForm ? '✕ Cancel' : '+ Add Expense'}
+              {showForm ? '✕ Cancel' : '+ Add New Expense'}
             </button>
           </div>
         </div>
